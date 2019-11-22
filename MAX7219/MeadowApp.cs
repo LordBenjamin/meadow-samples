@@ -32,20 +32,36 @@ namespace HelloMeadow
         private void Run()
         {
             ledPort.State = true;
-            Console.WriteLine("Intensity...");
-            display.SetIntensity(1);
-            Console.WriteLine("Scan Limit...");
-            display.SetScanLimit(0x7);
 
             Console.WriteLine("Display test...");
             display.StartDisplayTest();
             Thread.Sleep(1000);
             display.StopDisplayTest();
 
+            Console.WriteLine("Intensity...");
+            display.SetIntensity(0xF);
+            Console.WriteLine("Scan Limit...");
+            display.SetScanLimit(0x7);
+            Console.WriteLine("Decode mode = on...");
+            display.SetDecodeModeOn();
+
+            Console.WriteLine("Clear...");
+            display.ClearDisplay();
+
             Console.WriteLine("Wake from shutdown...");
             display.Wake();
 
-            Thread.Sleep(1000);
+            Console.WriteLine("Set digits...");
+            for (byte digit = 7; digit > 0; digit--)
+            {
+                for (byte val = 0; val < 10; val++)
+                {
+                    display.SetDigit(digit, val);
+                    Thread.Sleep(20);
+                }
+            }
+
+            Thread.Sleep(5000);
 
             Console.WriteLine("Shutdown...");
             display.Shutdown();

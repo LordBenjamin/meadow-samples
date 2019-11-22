@@ -5,6 +5,7 @@ namespace HelloMeadow
 {
     class MAX7219
     {
+        private const byte DecodeModeOpCode = 0x9;
         private const byte IntensityOpCode = 0xA;
         private const byte ScanLimitOpCode = 0xB;
         private const byte ShutdownOpCode = 0xC;
@@ -15,14 +16,14 @@ namespace HelloMeadow
         private IDigitalOutputPort clkPort;
 
         // 2 bytes (opcode + data) * 8 segments
-        private byte[] buffer;
+        private byte[] commandBuffer;
 
         public MAX7219(IIODevice device, IPin din, IPin cs, IPin clk, int displayCount = 1)
         {
             Device = device;
             DisplayCount = displayCount < 0 || displayCount > 8 ? 8 : displayCount;
 
-            buffer = new byte[DisplayCount * 2];
+            commandBuffer = new byte[DisplayCount * 2];
 
             dinPort = device.CreateDigitalOutputPort(din);
             csPort = device.CreateDigitalOutputPort(cs);
@@ -41,7 +42,7 @@ namespace HelloMeadow
 
         internal void SetScanLimit(byte value)
         {
-            SendCommand(ScanLimitOpCode, 0);
+            SendCommand(ScanLimitOpCode, value);
         }
 
         internal void StartDisplayTest()
@@ -64,6 +65,34 @@ namespace HelloMeadow
             SendCommand(IntensityOpCode, value);
         }
 
+        internal void SetDecodeModeOn(int addr = 0)
+        {
+            SendCommand(DecodeModeOpCode, 0xFF);
+        }
+
+        internal void SetDecodeModeOff(int addr = 0)
+        {
+            SendCommand(DecodeModeOpCode, 0x0);
+        }
+
+        public void ClearDisplay(int addr = 0)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                SendCommand(addr, (byte)(i + 1), 0);
+            }
+        }
+
+        public void SetDigit(byte digit, byte value, int addr = 0, bool decimalPoint = false)
+        {
+            if (decimalPoint)
+            {
+                value |= 0B10000000;
+            }
+
+            SendCommand(addr, (byte)(digit + 1), value);
+        }
+
         private void SendCommand(byte opCode, byte data)
         {
             for (int i = 0; i < DisplayCount; i++)
@@ -72,20 +101,20 @@ namespace HelloMeadow
             }
         }
 
-        private void SendCommand(int cell, byte opCode, byte data)
+        private void SendCommand(int addr, byte opCode, byte data)
         {
-            int offset = cell * 2;
+            int offset = addr * 2;
 
-            Array.Clear(buffer, 0, buffer.Length);
+            Array.Clear(commandBuffer, 0, commandBuffer.Length);
 
-            buffer[offset] = data;
-            buffer[offset + 1] = opCode;
+            commandBuffer[offset] = data;
+            commandBuffer[offset + 1] = opCode;
 
             csPort.State = false;
 
-            for (int i = buffer.Length; i > 0; i--)
+            for (int i = commandBuffer.Length; i > 0; i--)
             {
-                ShiftOut(buffer[i - 1]);
+                ShiftOut(commandBuffer[i - 1]);
             }
 
             csPort.State = true;
