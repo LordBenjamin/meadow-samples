@@ -18,6 +18,9 @@ namespace HelloMeadow
         // 2 bytes (opcode + data) * 8 segments
         private byte[] commandBuffer;
 
+        // 8 segments
+        byte[] valueBuffer = new byte[8];
+
         public MAX7219(IIODevice device, IPin din, IPin cs, IPin clk, int displayCount = 1)
         {
             Device = device;
@@ -91,6 +94,22 @@ namespace HelloMeadow
             }
 
             SendCommand(addr, (byte)(digit + 1), value);
+        }
+
+        public void SetValue(int num, int addr = 0)
+        {
+            // divides each digit into its own element within an array
+            int i = 7;
+            while (num > 0)
+            {
+                valueBuffer[i--] = (byte)(num % 10);
+                num /= 10;
+            }
+
+            for(; i < valueBuffer.Length; i++)
+            {
+                SetDigit((byte)(7 - i), valueBuffer[i]);
+            }
         }
 
         private void SendCommand(byte opCode, byte data)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using Meadow;
 using Meadow.Devices;
@@ -52,13 +53,10 @@ namespace HelloMeadow
             display.Wake();
 
             Console.WriteLine("Set digits...");
-            for (byte digit = 7; digit > 0; digit--)
+
+            for (int val = 0; val < 99999999; val++)
             {
-                for (byte val = 0; val < 10; val++)
-                {
-                    display.SetDigit(digit, val);
-                    Thread.Sleep(20);
-                }
+                display.SetValue(val);
             }
 
             Thread.Sleep(5000);
