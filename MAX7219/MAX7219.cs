@@ -1,9 +1,9 @@
 ﻿using System;
 using Meadow.Hardware;
 
-namespace HelloMeadow
+namespace BenjaminOwen.Meadow.Displays
 {
-    class MAX7219
+    public class MAX7219
     {
         private const byte DecodeModeOpCode = 0x9;
         private const byte IntensityOpCode = 0xA;

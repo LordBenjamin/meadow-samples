@@ -1,6 +1,6 @@
 ﻿using Meadow;
 
-namespace BenjaminOwen.Meadow
+namespace BenjaminOwen.Meadow.Samples.TMP36Temperature
 {
     class Program
     {

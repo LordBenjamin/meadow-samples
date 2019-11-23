@@ -2,7 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <OutputType>Exe</OutputType>
-    <AssemblyName>App</AssemblyName>
+    <AssemblyName>BenjaminOwen.Meadow.Samples.MAX7219Display</AssemblyName>
+    <RootNamespace>BenjaminOwen.Meadow.Samples.MAX7219Display</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Meadow.Foundation" Version="0.10.0" />

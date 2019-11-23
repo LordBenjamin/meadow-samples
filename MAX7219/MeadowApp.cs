@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using Meadow;
 using Meadow.Devices;
 using Meadow.Hardware;
+using BenjaminOwen.Meadow.Displays;
 
-namespace HelloMeadow
+namespace BenjaminOwen.Meadow.Samples.MAX7219Display
 {
     public class MeadowApp : App<F7Micro, MeadowApp>
     {

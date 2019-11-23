@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
-using BenjaminOwen.Meadow.Sensors.Temperature;
 using Meadow;
 using Meadow.Devices;
-using Meadow.Foundation.Sensors.Temperature;
 
-namespace BenjaminOwen.Meadow
+namespace BenjaminOwen.Meadow.Samples.TMP36Temperature
 {
     public class MeadowApp : App<F7Micro, MeadowApp>
     {

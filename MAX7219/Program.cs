@@ -1,6 +1,6 @@
 ﻿using Meadow;
 
-namespace HelloMeadow
+namespace BenjaminOwen.Meadow.Samples.MAX7219Display
 {
     class Program
     {
