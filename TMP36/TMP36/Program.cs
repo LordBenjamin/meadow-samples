@@ -1,6 +1,6 @@
 ﻿using Meadow;
 
-namespace HelloMeadow
+namespace BenjaminOwen.Meadow
 {
     class Program
     {

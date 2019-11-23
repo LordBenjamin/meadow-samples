@@ -1,37 +1,32 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
-using System.Net;
-using System.Net.NetworkInformation;
+using System.Threading.Tasks;
+using BenjaminOwen.Meadow.Sensors.Temperature;
 using Meadow;
 using Meadow.Devices;
 using Meadow.Foundation.Sensors.Temperature;
 
-namespace HelloMeadow
+namespace BenjaminOwen.Meadow
 {
     public class MeadowApp : App<F7Micro, MeadowApp>
     {
+        private readonly TMP36 tmp36;
+
         public MeadowApp()
         {
-            Debug.Print("Read TMP36");
+            tmp36 = new TMP36(Device, Device.Pins.A00);
+            Run().GetAwaiter().GetResult();
+        }
 
-            //
-            //  Create a new TMP36 object to check the temperature every 1s and
-            //  to report any changes greater than +/- 0.1C.
-            //
-            var _tmp36 = new AnalogTemperature(Device,
-                Device.Pins.A00,
-                AnalogTemperature.KnownSensorType.TMP36,
-                updateInterval: 1000,
-                temperatureChangeNotificationThreshold: 0.1F);
-
-            //
-            //  Connect an interrupt handler.
-            //
-            _tmp36.TemperatureChanged += (s, e) =>
+        private async Task Run()
+        {
+            while (true)
             {
-                Debug.Print("Temperature: " + e.CurrentValue.ToString("f2"));
-            };
+                float temp = await tmp36.ReadAsync()
+                    .ConfigureAwait(false);
+
+                Console.WriteLine("{0:N2} °C", temp);
+            }
         }
     }
 }
