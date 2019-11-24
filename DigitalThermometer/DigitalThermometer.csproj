@@ -1,0 +1,15 @@
+﻿<Project Sdk="Meadow.Sdk/1.1.0">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>App</AssemblyName>
+    <RootNamespace>BenjaminOwen.Meadow.Samples.DigitalThermometer</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\MAX7219\MAX7219.cs" Link="MAX7219.cs" />
+    <Compile Include="..\TMP36\TMP36\TMP36.cs" Link="TMP36.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Meadow.Foundation" Version="0.10.0" />
+  </ItemGroup>
+</Project>
