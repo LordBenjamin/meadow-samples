@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <OutputType>Exe</OutputType>
-    <AssemblyName>BenjaminOwen.Meadow.Samples.MAX7219Display</AssemblyName>
+    <AssemblyName>App</AssemblyName>
     <RootNamespace>BenjaminOwen.Meadow.Samples.MAX7219Display</RootNamespace>
   </PropertyGroup>
   <ItemGroup>

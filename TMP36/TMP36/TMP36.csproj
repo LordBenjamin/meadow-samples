@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <OutputType>Exe</OutputType>
-    <AssemblyName>BenjaminOwen.Meadow.Samples.TMP36Temperature</AssemblyName>
+    <AssemblyName>App</AssemblyName>
     <RootNamespace>BenjaminOwen.Meadow.Samples.TMP36Temperature</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
