@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using BenjaminOwen.Meadow.Sensors.Temperature;
 using Meadow;
 using Meadow.Devices;
+using Meadow.Units;
 
 namespace BenjaminOwen.Meadow.Samples.TMP36Temperature
 {
@@ -20,10 +21,10 @@ namespace BenjaminOwen.Meadow.Samples.TMP36Temperature
         {
             while (true)
             {
-                double temp = await tmp36.ReadAsync()
+                Temperature temp = await tmp36.ReadAsync()
                     .ConfigureAwait(false);
 
-                Console.WriteLine("{0:N2} °C", temp);
+                Console.WriteLine("{0:N2} °C", temp.Celsius);
             }
         }
     }

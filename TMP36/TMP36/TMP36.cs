@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Meadow.Hardware;
+using Meadow.Units;
+using TemperatureUnit = Meadow.Units.Temperature;
 
 namespace BenjaminOwen.Meadow.Sensors.Temperature
 {
@@ -15,10 +17,12 @@ namespace BenjaminOwen.Meadow.Sensors.Temperature
             analogPort = device.CreateAnalogInputPort(pin, voltageReference: 3.27f);
         }
 
-        public async Task<double> ReadAsync()
+        public async Task<TemperatureUnit> ReadAsync()
         {
             double millivolts = (await analogPort.Read()).Millivolts;
-            return (millivolts - yIntercept) / millivoltsPerDegreeC;
+            return new TemperatureUnit(
+                (millivolts - yIntercept) / millivoltsPerDegreeC,
+                TemperatureUnit.UnitType.Celsius);
         }
     }
 }
