@@ -21,7 +21,7 @@ namespace BenjaminOwen.Meadow.Displays
         // 8 segments
         byte[] valueBuffer = new byte[8];
 
-        public MAX7219(IIODevice device, IPin din, IPin cs, IPin clk, int displayCount = 1)
+        public MAX7219(IDigitalOutputController device, IPin din, IPin cs, IPin clk, int displayCount = 1)
         {
             Device = device;
             DisplayCount = displayCount < 0 || displayCount > 8 ? 8 : displayCount;
@@ -35,7 +35,7 @@ namespace BenjaminOwen.Meadow.Displays
             csPort.State = true;
         }
 
-        public IIODevice Device { get; }
+        public IDigitalOutputController Device { get; }
         public int DisplayCount { get; }
 
         public void Wake()

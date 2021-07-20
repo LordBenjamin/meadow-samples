@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using BenjaminOwen.Meadow.Sensors.Temperature;
 using Meadow;
 using Meadow.Devices;
 
@@ -19,7 +20,7 @@ namespace BenjaminOwen.Meadow.Samples.TMP36Temperature
         {
             while (true)
             {
-                float temp = await tmp36.ReadAsync()
+                double temp = await tmp36.ReadAsync()
                     .ConfigureAwait(false);
 
                 Console.WriteLine("{0:N2} °C", temp);

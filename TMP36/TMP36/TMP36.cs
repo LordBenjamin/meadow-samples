@@ -10,14 +10,14 @@ namespace BenjaminOwen.Meadow.Sensors.Temperature
 
         private IAnalogInputPort analogPort;
 
-        public TMP36(IIODevice device, IPin pin)
+        public TMP36(IAnalogInputController device, IPin pin)
         {
-            analogPort = device.CreateAnalogInputPort(pin);
+            analogPort = device.CreateAnalogInputPort(pin, voltageReference: 3.27f);
         }
 
-        public async Task<float> ReadAsync()
+        public async Task<double> ReadAsync()
         {
-            float millivolts = await analogPort.Read(1) * 1000;
+            double millivolts = (await analogPort.Read()).Millivolts;
             return (millivolts - yIntercept) / millivoltsPerDegreeC;
         }
     }

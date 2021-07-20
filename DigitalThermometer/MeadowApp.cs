@@ -46,7 +46,7 @@ namespace BenjaminOwen.Meadow.Samples.DigitalThermometer
             // Poll TMP36 and update display when temperature changes
             while (true)
             {
-                float temperature = await tmp36.ReadAsync()
+                double temperature = await tmp36.ReadAsync()
                     .ConfigureAwait(false);
 
                 int roundedTemperature = (int)Math.Round(temperature, 0);
