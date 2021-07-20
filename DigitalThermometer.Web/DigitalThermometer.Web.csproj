@@ -1,0 +1,18 @@
+﻿<Project Sdk="Meadow.Sdk/1.1.0">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>App</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\MAX7219\MAX7219.cs" Link="MAX7219.cs" />
+    <Compile Include="..\TMP36\TMP36\TMP36.cs" Link="TMP36.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Meadow.F7" Version="0.*" />
+    <PackageReference Include="Meadow.Foundation" Version="0.*" />
+    <PackageReference Include="Meadow.Foundation.Web.Maple.Server" Version="0.2.0" />
+    <PackageReference Include="Meadow.Units" Version="0.24.0" />
+  </ItemGroup>
+</Project>
